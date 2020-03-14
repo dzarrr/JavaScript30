@@ -93,10 +93,9 @@
     console.log('#8. Reduce Exercise');
     let frequency = data.reduce((freqHash, ele) => {
       if (freqHash[ele] === undefined) {
-        freqHash[ele] = 1;
-      } else {
-        freqHash[ele] += 1;
+        freqHash[ele] = 0;
       }
+      freqHash[ele] += 1;
       return freqHash;
     }, {});
     console.table(frequency);

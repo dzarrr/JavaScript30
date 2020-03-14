@@ -32,52 +32,28 @@
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
     console.log('#1. Filter');
-    console.log(
-      inventors.filter( inventor => {
-        return (inventor.year >= 1500 && inventor.year < 1600);
-      })
-    );
+    console.table(inventors.filter(inventor => (inventor.year >= 1500 && inventor.year < 1600)));
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
     console.log('#2. Map');
-    console.log(
-      inventors.map( inventor => { 
-        return { 
-          first: inventor.first, 
-          last: inventor.last
-        }
-      })
-    );
+    console.table(inventors.map( inventor => inventor.first + ' ' + inventor.last));
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
     console.log('#3. Sort');
-    console.log(
-      inventors.sort( (a, b) => {
-        if (a.year > b.year) {
-          return 1;
-        } else if (a.year < b.year) {
-          return -1;
-        } else {
-          return 0;
-        }
-      })
-    );
+    console.table(inventors.sort((a, b) => (a.year > b.year) ? 1 : -1));
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
     console.log('#4. Reduce');
     console.log(
-      inventors.reduce((sum, inventor) => {
-        console.log(sum, inventor);
-        return (sum + (inventor.passed - inventor.year));
-      }, 0)
-    )
+      inventors.reduce((sum, inventor) => (sum + inventor.passed - inventor.year), 0)
+    );
 
     // 5. Sort the inventors by years lived
     console.log('#5. Sort 2');
-    console.log(
+    console.table(
       inventors.sort( (a, b) => {
         if ((a.passed - a.year) > (b.passed - b.year)) {
           return 1;
@@ -91,15 +67,16 @@
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
-
+    let links = ["Boulevards of Paris", "City walls of Paris", "Thiers wall", "Wall of Charles V", "Wall of Philip II Augustus", "City gates of Paris", "Haussmann's renovation of Paris", "Boulevards of the Marshals", "Boulevard Auguste-Blanqui", "Boulevard Barbès", "Boulevard Beaumarchais", "Boulevard de l'Amiral-Bruix", "Boulevard Mortier", "Boulevard Poniatowski", "Boulevard Soult", "Boulevard des Capucines", "Boulevard de la Chapelle", "Boulevard de Clichy", "Boulevard du Crime", "Boulevard du Général-d'Armée-Jean-Simon", "Boulevard Haussmann", "Boulevard de l'Hôpital", "Boulevard des Italiens", "Boulevard Lefebvre", "Boulevard de la Madeleine", "Boulevard de Magenta", "Boulevard Marguerite-de-Rochechouart", "Boulevard Montmartre", "Boulevard du Montparnasse", "Boulevard Raspail", "Boulevard Richard-Lenoir", "Boulevard Saint-Germain", "Boulevard Saint-Michel", "Boulevard de Sébastopol", "Boulevard de Strasbourg", "Boulevard du Temple", "Boulevard Voltaire", "Boulevard de la Zone"];
+    console.log(links.filter(link => link.includes('de')));
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
     console.log('#7. Sort Last Name');
-    console.log(
+    console.table(
       people.sort((a, b) => {
-        let a_lastName = a.split(', ')[1];
-        let b_lastName = b.split(', ')[1];
+        let a_lastName = a.split(', ')[0];
+        let b_lastName = b.split(', ')[0];
         if (a_lastName > b_lastName) {
           return 1;
         } else if (a_lastName < b_lastName) {
@@ -113,6 +90,16 @@
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+    console.log('#8. Reduce Exercise');
+    let frequency = data.reduce((freqHash, ele) => {
+      if (freqHash[ele] === undefined) {
+        freqHash[ele] = 1;
+      } else {
+        freqHash[ele] += 1;
+      }
+      return freqHash;
+    }, {});
+    console.table(frequency);
 
   </script>
 </body>
